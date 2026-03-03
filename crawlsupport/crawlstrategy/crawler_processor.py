@@ -1,6 +1,4 @@
-import asyncio
 import itertools
-import time
 from typing import List
 
 from crawlsupport.crawlstrategy.ancb import AncbCrawler
@@ -10,7 +8,6 @@ from crawlsupport.crawlstrategy.rcmm import RcmmCrawler
 from crawlsupport.crawlstrategy.vestnik import VestnikCrawler
 from crawl4ai import CrawlResult
 from dao.articles.articles_repository import ArticlesRepository
-
 
 class CrawlerProcessor:
     """

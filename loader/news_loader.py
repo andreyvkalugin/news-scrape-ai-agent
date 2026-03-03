@@ -1,14 +1,10 @@
-import asyncio
 import json
 from typing import List
 
-from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters.character import RecursiveCharacterTextSplitter
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
 from custom_crawler2.extraction_strategy import GigaExtractionStrategy
 from dao.articles.articles_repository import ArticlesRepository
 from dao.vector.vector_repository import VectorRepository
-
 
 class NewsLoader:
     def __init__(self):
