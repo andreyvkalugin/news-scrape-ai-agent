@@ -3,5 +3,6 @@ from typing import Optional
 
 @dataclass
 class User:
-    name: Optional[str] = None
     telegram_id: int
+    name: Optional[str] = None
+    

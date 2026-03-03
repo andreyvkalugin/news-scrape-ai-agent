@@ -2,6 +2,10 @@
 .vscode/
 .env
 
+# DB
+vector_database/
+*.db
+
 # Python bytecode files
 __pycache__/
 *.pyc

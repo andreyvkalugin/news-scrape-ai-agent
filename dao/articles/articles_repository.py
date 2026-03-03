@@ -7,7 +7,7 @@ from dao.articles.prepared_statement import (
     INSERT_STATEMENT,
     SEEN_ARTICLE_STATEMENT,
 )
-from sqlite3 import Connection, Cursor
+from sqlite3 import Connection
 
 from shared.http_util import normalize
 from shared.time_util import get_now
@@ -45,5 +45,6 @@ class ArticlesRepository:
     def _execute(self, sql: str, parameters=()):
         self.connection.cursor().execute(sql, parameters)
 
-    def new_connection(self):
-        self.connection: Connection = sqlite3.connect("articles_database.db")    
+    def new_connection(self) -> Connection:
+        self.connection: Connection = sqlite3.connect("user_database.db")
+        return self.connection    

@@ -1,5 +1,5 @@
 import asyncio
-import sqlite3
+from sqlite3 import Connection
 from typing import List
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
@@ -15,7 +15,7 @@ class SchedulerManager:
         self.crawler = CrawlerProcessor()
         self.scheduler.add_job(
             self.crawl,
-            trigger=IntervalTrigger(minutes=5),
+            trigger=IntervalTrigger(minutes=1),
             id="crawl_news",
             replace_existing=True,
         )
@@ -29,18 +29,26 @@ class SchedulerManager:
 
     def crawl(self):
         print("Запуск анализа HTML страниц сайтов...")
-        self._set_thread_db_connection()
-        with asyncio.Runner() as runner:
-            runner.run(self.crawler.crawl_all())
+        self._closable(lambda: self._run_crawler())
         print("Окончание анализа HTML.")
 
     def read(self):
         print("Запуск чтения HTML страниц сайтов...")
-        self._set_thread_db_connection()
-        with asyncio.Runner() as runner:
-            runner.run(self.loader.load_news())
+        self._closable(lambda: self._run_loader())
         print("Окончание чтения HTML.")
 
-    def _set_thread_db_connection(self):
-        self.loader.articles_repository.new_connection()
-        self.crawler.articles_repository.new_connection()
+    def _run_loader(self):
+        with asyncio.Runner() as runner:
+            return runner.run(self.loader.load_news())
+
+    def _run_crawler(self):
+        with asyncio.Runner() as runner:
+            runner.run(self.crawler.crawl_all())    
+
+    def _closable(self, func):
+        connection_articles = self.loader.articles_repository.new_connection()
+        connection_crawler = self.crawler.articles_repository.new_connection()
+        func()
+        connection_articles.close()
+        connection_crawler.close()
+
