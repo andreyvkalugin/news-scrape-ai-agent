@@ -14,13 +14,13 @@ class SchedulerManager:
         self.cleanup_job = CleanupJob()
         self.scheduler.add_job(
             self.crawl_job,
-            trigger=IntervalTrigger(minutes=1),
+            trigger=IntervalTrigger(minutes=100),
             id="crawl_news",
             replace_existing=True,
         )
         self.scheduler.add_job(
             self.load_job,
-            trigger=IntervalTrigger(minutes=2),
+            trigger=IntervalTrigger(minutes=200),
             id="load_news",
             replace_existing=True,
         )
