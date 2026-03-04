@@ -2,7 +2,7 @@ import json
 from typing import List
 
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
-from custom_crawler2.extraction_strategy import GigaExtractionStrategy
+from custom_crawler.extraction_strategy import GigaExtractionStrategy
 from dao.articles.articles_repository import ArticlesRepository
 from dao.vector.vector_repository import VectorRepository
 

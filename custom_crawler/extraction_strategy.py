@@ -43,7 +43,7 @@ from bs4 import BeautifulSoup
 from lxml import html, etree
 
 from crawl4ai.prompts import PROMPT_EXTRACT_BLOCKS_WITH_INSTRUCTION, PROMPT_EXTRACT_SCHEMA_WITH_INSTRUCTION, PROMPT_EXTRACT_BLOCKS, PROMPT_EXTRACT_INFERRED_SCHEMA
-from custom_crawler2.prompts import PROMPT_EXTRACT_GIST
+from custom_crawler.prompts import PROMPT_EXTRACT_GIST
 
 
 ###################################################################
