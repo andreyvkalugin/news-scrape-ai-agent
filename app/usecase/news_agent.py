@@ -6,6 +6,7 @@ from langchain.agents.factory import create_agent
 from langchain_core.tools import create_retriever_tool
 from langgraph.checkpoint.memory import MemorySaver
 
+from app.usecase.agent_prompt import PROMPT
 from custom_agent.custom_giga_agent import CustomGigaChat
 from chromadb.config import Settings
 from langchain_chroma import Chroma
@@ -36,7 +37,7 @@ class NewsAgent:
             model=giga_chat,
             tools=[chroma_retriever_tool],
             checkpointer=MemorySaver(),
-            system_prompt="prt3",
+            system_prompt=PROMPT,
         )
 
     def reply(self, message: str, user_id: int) -> str:
