@@ -10,3 +10,16 @@ vector_database/
 __pycache__/
 *.pyc
 *.pyo
+
+# test
+chroma_data.py
+chroma_run.py
+chroma_time.py
+chroma.py
+crawl_final.py
+crawler.py
+examination.yaml
+fun_fact_prompt.json
+fun_fact_prompt.yaml
+main_old.py
+some_test.py

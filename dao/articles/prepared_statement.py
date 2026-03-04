@@ -1,10 +1,10 @@
 INSERT_STATEMENT = """
-            INSERT INTO News (url, timestamp) 
+            INSERT INTO news_article (url, timestamp) 
             VALUES (?, ?)
             ON CONFLICT(url) DO NOTHING;"""
 
-CREATE_NEWS_TABLE = """
-            CREATE TABLE IF NOT EXISTS News (
+CREATE_ARTICLES_TABLE = """
+            CREATE TABLE IF NOT EXISTS news_article (
             id INTEGER PRIMARY KEY,
             url TEXT NOT NULL,
             timestamp INTEGER,
@@ -15,6 +15,8 @@ CREATE_NEWS_TABLE = """
             )
         """
 SEEN_ARTICLE_STATEMENT = """
-            UPDATE News SET is_seen = TRUE WHERE url = ?;
+            UPDATE news_article SET is_seen = TRUE WHERE url = ?;
         """
-ALL_RELEVANT = "SELECT url FROM News WHERE NOT deleted AND NOT is_seen AND is_actual;"
+ALL_RELEVANT_ARTICLES = """
+            SELECT url FROM news_article WHERE NOT deleted AND NOT is_seen AND is_actual;
+        """

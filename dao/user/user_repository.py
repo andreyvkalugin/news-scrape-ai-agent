@@ -9,21 +9,19 @@ from dao.user.prepared_statement import (
 from sqlite3 import Connection
 
 from dao.user.user import User
+from shared.db_util import closable
 
 class UserRepository:
-    def __init__(self):
+    @closable(db="user_database.db")
+    def __init__(self, cursor):
         print("создание БД пользователей")
-        self.new_connection()
-        self.connection.cursor().execute(CREATE_USER_TABLE)
-        self.connection.commit()
+        cursor.execute(CREATE_USER_TABLE)
         print("БД записей регистра пользователей успешно создана.")
 
-    def save(self, name: str, telegram_id: int):
-        self.connection.cursor().execute(INSERT_USER, (telegram_id, name))
+    @closable(db="user_database.db")
+    def save(self, cursor, name: str, telegram_id: int):
+        cursor.execute(INSERT_USER, (telegram_id, name))
 
-    def all(self) -> list[User]:
-        return [User(name=row[0], telegram_id=row[1]) for row in self.connection.cursor().execute(ALL_USER).fetchall()]
-    
-    def new_connection(self) -> Connection:
-        self.connection: Connection = sqlite3.connect("user_database.db")
-        return self.connection
+    @closable(db="user_database.db")
+    def all(self, cursor) -> list[User]:
+        return [User(name=row[0], telegram_id=row[1]) for row in cursor.execute(ALL_USER).fetchall()]

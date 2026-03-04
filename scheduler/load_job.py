@@ -1,15 +1,12 @@
 import asyncio
 
+from loader.news_loader import NewsLoader
 from scheduler.job import Job
 
 
 class LoadJob(Job):
+    def __init__(self):
+        self.loader = NewsLoader()
 
-    def __call__(self):
-        print("Запуск чтения HTML страниц сайтов...")
-        self._closable(lambda: self._run_loader())
-        print("Окончание чтения HTML.")
-
-    def _run_loader(self):
-        with asyncio.Runner() as runner:
-            return runner.run(self.loader.load_news())
+    async def arun(self):
+        await self.loader.load_news()

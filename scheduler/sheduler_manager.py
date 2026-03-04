@@ -17,7 +17,7 @@ class SchedulerManager:
         )
         self.scheduler.add_job(
             self.load_job,
-            trigger=IntervalTrigger(minutes=240),
+            trigger=IntervalTrigger(minutes=2),
             id="load_news",
             replace_existing=True,
         )
