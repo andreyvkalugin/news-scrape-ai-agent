@@ -11,6 +11,7 @@ from custom_agent.custom_giga_agent import CustomGigaChat
 from chromadb.config import Settings
 from langchain_chroma import Chroma
 
+from dao.vector.vector_repository import VectorRepository
 from embedding.embedding_model import EmbeddingsSupport
 
 
@@ -24,12 +25,12 @@ class NewsAgent:
             model="GigaChat",
             temperature=0.6,
         )
-        vector_store = Chroma(
-            embedding_function=EmbeddingsSupport(),
-            persist_directory="./vector_database",
-            client_settings=Settings(anonymized_telemetry=False),
-        )
-        retriever = vector_store.as_retriever(search_kwargs={"k": 4})
+        # vector_store = Chroma(
+        #     embedding_function=EmbeddingsSupport(),
+        #     persist_directory="./vector_database",
+        #     client_settings=Settings(anonymized_telemetry=False),
+        # )
+        retriever = VectorRepository().vector_store.as_retriever(search_kwargs={"k": 4})
         chroma_retriever_tool = create_retriever_tool(
             retriever, name="news_searcher", description="news searcher"
         )

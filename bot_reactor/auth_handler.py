@@ -29,10 +29,6 @@ class AuthHandler:
 
     def _save_user(self, message_data):
         name, user_id = message_data.text, message_data.from_user.id
-        self._closable(lambda: self.repo.save(name, user_id))
+        self.repo.save(name, user_id)
         self.all_users.append(User(telegram_id=user_id, name=name))
         self.pending_user.remove(user_id)
-
-    def _closable(self, func):
-        with self.repo.new_connection() as connection:
-            func()
