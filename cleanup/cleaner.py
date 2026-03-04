@@ -7,8 +7,8 @@ from custom_crawler.extraction_strategy import GigaExtractionStrategy
 from dao.articles.articles_repository import ArticlesRepository
 from dao.vector.vector_repository import VectorRepository
 
-class Cleaner:
 
+class Cleaner:
     CLEAN_UP_DAYS = 5
 
     def __init__(self):
