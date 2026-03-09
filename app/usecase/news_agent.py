@@ -25,11 +25,6 @@ class NewsAgent:
             model="GigaChat",
             temperature=0.6,
         )
-        # vector_store = Chroma(
-        #     embedding_function=EmbeddingsSupport(),
-        #     persist_directory="./vector_database",
-        #     client_settings=Settings(anonymized_telemetry=False),
-        # )
         retriever = VectorRepository().vector_store.as_retriever(search_kwargs={"k": 4})
         chroma_retriever_tool = create_retriever_tool(
             retriever, name="news_searcher", description="news searcher"

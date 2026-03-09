@@ -25,7 +25,7 @@ class SchedulerManager:
             replace_existing=True,
         )
         self.scheduler.add_job(
-            self.load_job,
+            self.cleanup_job,
             trigger=IntervalTrigger(days=Cleaner.CLEAN_UP_DAYS),
             id="clean_up",
             replace_existing=True,
