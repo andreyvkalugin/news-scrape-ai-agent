@@ -16,7 +16,6 @@ class NewsLoader:
             news = await self._obtain_news(url)
             print(f"сохраняемые новость в векторную БД: {url}")
             self.vector_repository.save(news, url)
-            break
 
     async def _obtain_news(self, url: str) -> List[str]:
         try:

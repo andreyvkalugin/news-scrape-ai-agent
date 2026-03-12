@@ -17,10 +17,10 @@ class CrawlerProcessor:
     def __init__(self):
         self.crawlers = [
             AncbCrawler(),
-            # ArdexpertCrawler(),
-            # KtostroitCrawler(),
-            # RcmmCrawler(),
-            # VestnikCrawler(),
+            ArdexpertCrawler(),
+            KtostroitCrawler(),
+            RcmmCrawler(),
+            VestnikCrawler(),
         ]
         self.articles_repository = ArticlesRepository()
 
