@@ -7,7 +7,7 @@ from langchain_core.tools import create_retriever_tool
 from langgraph.checkpoint.memory import MemorySaver
 
 from app.usecase.agent_prompt import PROMPT
-from custom_agent.custom_giga_agent import CustomGigaChat
+from gigagent.custom_giga_agent import CustomGigaChat
 from chromadb.config import Settings
 from langchain_chroma import Chroma
 

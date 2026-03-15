@@ -70,8 +70,8 @@ from langchain_core.tools import BaseTool
 from langchain_core.utils.pydantic import is_basemodel_subclass, pre_init
 from pydantic import BaseModel
 
-from custom_agent.base import _BaseGigaChat
-from custom_agent.functions_binder import (
+from gigagent.base import _BaseGigaChat
+from gigagent.functions_binder import (
     convert_to_gigachat_function,
     convert_to_gigachat_tool,
 )

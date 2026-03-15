@@ -249,7 +249,7 @@ def _get_python_function_name(function: Callable) -> str:
 def _model_to_schema(model: Union[type[BaseModel], dict[str, Any]]) -> dict:
     if hasattr(model, "model_json_schema"):
         # Pydantic 2
-        from custom_agent.pydentic_generator import GigaChatJsonSchema
+        from gigagent.pydentic_generator import GigaChatJsonSchema
 
         return model.model_json_schema(schema_generator=GigaChatJsonSchema)
     elif hasattr(model, "schema"):
