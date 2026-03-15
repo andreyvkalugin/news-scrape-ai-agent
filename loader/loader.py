@@ -3,7 +3,7 @@ import os
 from typing import List
 
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
-from custom_crawler.extraction_strategy import GigaExtractionStrategy
+from loader.html_crawler.extraction_strategy import GigaExtractionStrategy
 from custom_agent.custom_giga_agent import CustomGigaChat
 from langchain_community.document_loaders import AsyncHtmlLoader
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage

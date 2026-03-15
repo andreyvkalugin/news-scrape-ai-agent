@@ -2,12 +2,6 @@ import chromadb
 from chromadb.api.types import GetResult
 from datetime import datetime, timedelta, timezone
 
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
-from custom_crawler.extraction_strategy import GigaExtractionStrategy
-from dao.articles.articles_repository import ArticlesRepository
-from dao.vector.vector_repository import VectorRepository
-
-
 class Cleaner:
     CLEAN_UP_DAYS = 5
 
