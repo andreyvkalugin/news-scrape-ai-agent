@@ -2,6 +2,7 @@ from typing import Union
 
 from pydantic.json_schema import GenerateJsonSchema, JsonSchemaValue, core_schema
 
+
 class GigaChatJsonSchema(GenerateJsonSchema):
     def field_is_required(
         self,
