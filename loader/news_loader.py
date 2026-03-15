@@ -1,14 +1,11 @@
-import json
-from typing import List
-
 from dao.articles.articles_repository import ArticlesRepository
-from dao.vector.vector_repository import VectorRepository
+from dao.vector.hybrid_vector import HybridVectorRepository
 from loader.loader import Loader
 
 class NewsLoader(Loader):
     def __init__(self):
         super().__init__()
-        self.vector_repository = VectorRepository()
+        self.vector_repository = HybridVectorRepository()
         self.articles_repository = ArticlesRepository()
 
     async def load_news(self):

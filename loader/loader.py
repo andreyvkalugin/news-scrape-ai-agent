@@ -22,13 +22,13 @@ class Loader:
             temperature=0.3,
         )
 
-    def _obtain_news(self, url: str) -> List[str]:
+    def _obtain_news(self, url: str) -> str:
         """Fetch webpages and extract text content"""
         for doc in AsyncHtmlLoader(url).load():
             html = doc.page_content
             prompt = EXTRACTION_PROMPT.format(html=html[:8000])
             response = self._llm.invoke([HumanMessage(content=prompt)])
-            return [response.content]
+            return response.content
 
     async def _crawl_news(self, url: str) -> List[str]:
         try:

@@ -52,7 +52,7 @@ class HybridVectorRepository:
                 separators=["\n\n", "\n", ". ", " ", ""],
             )
             documents = text_splitter.create_documents(
-                texts=[text], metadatas=[{"createdAt": get_now(), "url": url}]
+                texts=[text], metadatas=[{"createdAt": get_now(), "source": url}]
             )
             dedublicated_documents = self._deduplicate(documents)
             if dedublicated_documents:

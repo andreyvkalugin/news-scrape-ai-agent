@@ -3,7 +3,7 @@ from apscheduler.triggers.interval import IntervalTrigger
 from cleanup.cleaner import Cleaner
 from scheduler.crawl_job import CrawlJob
 from scheduler.load_job import LoadJob
-from scheduler.wipe_job import CleanupJob
+from scheduler.cleanup_job import CleanupJob
 
 
 class SchedulerManager:
@@ -20,7 +20,7 @@ class SchedulerManager:
         )
         self.scheduler.add_job(
             self.load_job,
-            trigger=IntervalTrigger(minutes=200),
+            trigger=IntervalTrigger(minutes=300),
             id="load_news",
             replace_existing=True,
         )

@@ -32,14 +32,12 @@ def build_graph():
     # --- Построение графа ---
     graph = StateGraph(AgentState)
 
-    graph.add_node("query_rewriter", nodes.query_rewriter)
     graph.add_node("react_agent", nodes.react_node)
     graph.add_node("relevance_grader", nodes.relevance_grader)
     graph.add_node("hallucination_checker", nodes.hallucination_checker)
 
     # Рёбра
-    graph.add_edge(START, "query_rewriter")
-    graph.add_edge("query_rewriter", "react_agent")
+    graph.add_edge(START, "react_agent")
     graph.add_edge("react_agent", "relevance_grader")
     graph.add_edge("relevance_grader", "hallucination_checker")
 
