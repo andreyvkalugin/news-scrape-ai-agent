@@ -1,9 +1,6 @@
-from collections import deque
 import telebot
-from app.usecase.news_agent import NewsAgent
+from app.usecase.chatprocessor.news_agent import NewsAgent
 from bot_reactor.auth_handler import AuthHandler
-from dao.user.user import User
-from dao.user.user_repository import UserRepository
 
 
 class MessageHandler(AuthHandler):

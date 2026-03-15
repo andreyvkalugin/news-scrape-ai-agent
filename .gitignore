@@ -1,6 +1,7 @@
 .venv/
 .vscode/
 .env
+.idea
 
 # DB
 vector_database/

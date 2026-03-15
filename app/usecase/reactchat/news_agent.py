@@ -6,13 +6,10 @@ from langchain.agents.factory import create_agent
 from langchain_core.tools import create_retriever_tool
 from langgraph.checkpoint.memory import MemorySaver
 
-from app.usecase.agent_prompt import PROMPT
+from app.usecase.reactchat.agent_prompt import PROMPT
 from gigagent.custom_giga_agent import CustomGigaChat
-from chromadb.config import Settings
-from langchain_chroma import Chroma
 
 from dao.vector.vector_repository import VectorRepository
-from embedding.embedding_model import EmbeddingsSupport
 
 
 class NewsAgent:
