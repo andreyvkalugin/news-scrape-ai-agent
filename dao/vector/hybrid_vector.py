@@ -67,6 +67,35 @@ class HybridVectorRepository:
                 e,
             )
 
+    # ------------------------------------------------------------------
+    # Сохранение всех документов
+    # ------------------------------------------------------------------
+    def saveAll(self, text: list[str], url: str):
+        """Сохраняет текст в векторную базу с дедупликацией."""
+        if not text:
+            return
+        try:
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=self.CHUNK_SIZE,
+                chunk_overlap=self.CHUNK_OVERLAP,
+                separators=["\n\n", "\n", ". ", " ", ""],
+            )
+            documents = text_splitter.create_documents(
+                texts=text, metadatas=[{"createdAt": get_now(), "source": url}]
+            )
+            dedublicated_documents = self._deduplicate(documents)
+            if dedublicated_documents:
+                self._store.add_documents(dedublicated_documents)
+                # Сбрасываем BM25-индекс, т.к. добавились новые документы
+                self._bm25_index = None
+                # добавляем информацию что статья прочитана
+                self.article_repository.seen_article(url)
+        except Exception as e:
+            print(
+                f"В ходе сохраненния векторного представления статьи: [ {url} ] возникла ошибка.",
+                e,
+            )        
+
     def _deduplicate(self, docs: List[Document]) -> List[Document]:
         """Убирает чанки с идентичным содержимым (первые 100 символов)."""
         existing = {
