@@ -23,8 +23,8 @@ from shared.time_util import get_now
 
 
 class HybridVectorRepository:
-    CHUNK_SIZE = 800
-    CHUNK_OVERLAP = 150
+    CHUNK_SIZE = 1900
+    CHUNK_OVERLAP = 190
 
     def __init__(self):
         self._embedding = EmbeddingsSupport()
@@ -94,7 +94,7 @@ class HybridVectorRepository:
             print(
                 f"В ходе сохраненния векторного представления статьи: [ {url} ] возникла ошибка.",
                 e,
-            )        
+            )
 
     def _deduplicate(self, docs: List[Document]) -> List[Document]:
         """Убирает чанки с идентичным содержимым (первые 100 символов)."""

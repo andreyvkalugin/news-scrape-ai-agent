@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 from typing import List
 
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
@@ -21,16 +22,25 @@ class Loader:
             verify_ssl_certs=False,
             temperature=0.3,
         )
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 
-    def _obtain_news(self, url: str) -> str:
-        """Fetch webpages and extract text content"""
+    def _deep_crawl_news(self,url: str) -> str:
+        """Fetch webpages aggressive and extract text content"""
+        response = requests.get(url, headers=self.headers)
+        html = response.text
+        prompt = EXTRACTION_PROMPT.format(html=html[:12000])
+        response = self._llm.invoke([HumanMessage(content=prompt)])
+        return response.content
+
+    def _rapid_crawl_news(self, url: str) -> str:
+        """Fetch webpages by langchain and extract text content"""
         for doc in AsyncHtmlLoader(url).load():
             html = doc.page_content
             prompt = EXTRACTION_PROMPT.format(html=html[:8000])
             response = self._llm.invoke([HumanMessage(content=prompt)])
             return response.content
 
-    async def _crawl_news(self, url: str) -> List[str]:
+    async def _comprehensive_crawl_news(self, url: str) -> List[str]:
         try:
             async with AsyncWebCrawler(config=BrowserConfig(verbose=True)) as crawler:
                 raw_news = await crawler.arun(
