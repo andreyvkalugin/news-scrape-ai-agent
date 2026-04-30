@@ -10,6 +10,6 @@ class NewsLoader(Loader):
 
     async def load_news(self):
         for url in self.articles_repository.all_relevant():
-            news = self._deep_crawl_news(url)
+            news = await self._comprehensive_crawl_news(url)
             print(f"сохраняемые новость в векторную БД: {url}")
-            self.vector_repository.save(news, url)
+            self.vector_repository.saveAll(news, url)
