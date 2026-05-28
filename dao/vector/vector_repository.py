@@ -32,7 +32,7 @@ class VectorRepository:
                 chunk_overlap=200,
             )
             documents = text_splitter.create_documents(
-                texts=text, metadatas=[{"createdAt": get_now(), "url": url}]
+                texts=text, metadatas=[{"createdAt": get_now(), "url": url, "chunk_index": i} for i in range(len(text))]
             )
             self.vector_store.add_documents(documents)
             self.article_repository.seen_article(url)
